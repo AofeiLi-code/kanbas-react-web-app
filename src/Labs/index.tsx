@@ -1,13 +1,13 @@
 import Lab1 from "./Lab1";
 import { Route, Routes, Navigate } from "react-router";
-import TOC from "./TOC";
 import Lab2 from "./Lab2";
 import Lab3 from "./Lab3";
+import TOC from "./TOC";
 export default function Labs() {
   return (
     <div>
       <h1>Labs</h1>
-      <h3>Aofei <Li></Li></h3>
+      <h3>Aofei Li</h3>
       <TOC />
       <a href="https://github.com/AofeiLi-code/kanbas-react-web-app.git" id="wd-github">
         My GitHub Repository
