@@ -1,13 +1,17 @@
 import { FaPlusCircle, FaSearch } from "react-icons/fa";
 import { BsGripVertical } from "react-icons/bs";
 import AssignmentControlButtons from "./AssignmentControlButtons";
-import { Link } from "react-router-dom"; 
+import { Link, useParams } from "react-router-dom";
+import { assignments } from "../../Database";
+
 
 export default function Assignments() {
+  const { cid } = useParams();  // Get current course ID
+  const courseAssignments = assignments.filter(assignment => assignment.course === cid);
+
   return (
     <div id="wd-assignments">
       <div className="d-flex justify-content-between mb-3">
-        {/* Search for Assignments */}
         <div className="input-group w-50">
           <span className="input-group-text">
             <FaSearch />
@@ -19,7 +23,6 @@ export default function Assignments() {
           />
         </div>
 
-        {/* Group and Assignment buttons */}
         <div>
           <button className="btn btn-primary me-2">
             + Group
@@ -30,46 +33,20 @@ export default function Assignments() {
         </div>
       </div>
 
-      {/* Assignment List */}
       <ul className="list-group">
-        <li className="list-group-item d-flex align-items-center justify-content-between border-start border-success border-3">
-          <div className="d-flex align-items-center">
-            <BsGripVertical className="me-3 fs-5 text-secondary" />
-            <div>
-              <Link to="/Kanbas/Courses/1234/Assignments/A1">
-                <div className="fw-bold">A1 - ENV + HTML</div>
-              </Link>
-              Multiple Modules | Not available until May 6 | 100 pts
+        {courseAssignments.map(assignment => (
+          <li key={assignment._id} className="list-group-item d-flex align-items-center justify-content-between border-start border-success border-3">
+            <div className="d-flex align-items-center">
+              <BsGripVertical className="me-3 fs-5 text-secondary" />
+              <div>
+                <Link to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
+                  <div className="fw-bold">{assignment.title}</div>
+                </Link>
+              </div>
             </div>
-          </div>
-          <AssignmentControlButtons />
-        </li>
-
-        <li className="list-group-item d-flex align-items-center justify-content-between border-start border-success border-3">
-          <div className="d-flex align-items-center">
-            <BsGripVertical className="me-3 fs-5 text-secondary" />
-            <div>
-              <Link to="/Kanbas/Courses/1234/Assignments/A2">
-                <div className="fw-bold">A2 - CSS + BOOTSTRAP</div>
-              </Link>
-              Multiple Modules | Not available until May 13 | 100 pts
-            </div>
-          </div>
-          <AssignmentControlButtons />
-        </li>
-
-        <li className="list-group-item d-flex align-items-center justify-content-between border-start border-success border-3">
-          <div className="d-flex align-items-center">
-            <BsGripVertical className="me-3 fs-5 text-secondary" />
-            <div>
-              <Link to="/Kanbas/Courses/1234/Assignments/A3">
-                <div className="fw-bold">A3 - JAVASCRIPT + REACT</div>
-              </Link>
-              Multiple Modules | Not available until May 20 | 100 pts
-            </div>
-          </div>
-          <AssignmentControlButtons />
-        </li>
+            <AssignmentControlButtons />
+          </li>
+        ))}
       </ul>
     </div>
   );
