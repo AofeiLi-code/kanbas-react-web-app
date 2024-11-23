@@ -21,7 +21,7 @@ export default function TOC() {
         className="nav-link">React App Repository</a></li>
         <li className="nav-item"><a id="wd-github" href="https://github.com/AofeiLi-code/kanbas-react-web-app.git" target="_blank"
         className="nav-link">Node.js Server Repository</a></li>
-        <li className="nav-item"><a id="wd-github" href="https://github.com/AofeiLi-code" target="_blank"
+        <li className="nav-item"><a id="wd-github" href="https://a5--aofeili-cs4550.netlify.app" target="_blank"
         className="nav-link">React App on Netlify</a></li>
         <li className="nav-item"><a id="wd-github" href="https://kanbas-node-server-app-7a3j.onrender.com" target="_blank"
         className="nav-link">Node.js Server</a></li>
