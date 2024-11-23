@@ -11,19 +11,18 @@ const assignmentsSlice = createSlice({
     reducers: {
         addAssignment: (state, { payload: assignment }) => {
             const newAssignment: any = {
-                _id: assignment._id,
+                _id: new Date().getTime().toString(),
                 title: assignment.title,
                 course: assignment.course,
-                points: assignment.points,
-                type: assignment.type || "",
-                assignTo: assignment.assignTo || "Everyone",
-                available: assignment.available,
-                due: assignment.due,
-                until: assignment.until || "",
-                description: assignment.description || "",
+                description: assignment.description,
+                point: assignment.point,
+                dueDate: assignment.dueDate,
+                availableFromDate: assignment.availableFromDate,
+                availableUntilDate: assignment.availableUntilDate
             };
-            state.assignments = [...state.assignments, newAssignment];
+            state.assignments = [...state.assignments, newAssignment] as any;
         },
+
 
         deleteAssignment: (state, { payload: assignmentId }) => {
             state.assignments = state.assignments.filter(

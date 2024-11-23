@@ -15,7 +15,14 @@ const enrollmentSlice = createSlice({
                 user: action.payload.user,
                 course: action.payload.course,
             };
-            state.enrollments = [...state.enrollments, newEnrollment];
+
+            const exists = state.enrollments.some(
+                (enrollment) => enrollment._id === newEnrollment._id
+            );
+
+            if (!exists) {
+                state.enrollments = [...state.enrollments, newEnrollment];
+            }
         },
         unenroll: (state, action) => {
             state.enrollments = state.enrollments.filter(
