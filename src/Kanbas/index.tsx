@@ -3,13 +3,13 @@ import Account from "./Account";
 import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
 import Courses from "./Courses";
-import Enrollments from "./Enrollments"; // 引入 Enrollments 组件
+import Enrollments from "./Enrollments";
 import "./styles.css";
 import Session from "./Account/Session";
 import * as userClient from "./Account/client";
 import { useEffect, useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
-import ProtectedRole from "./Enrollments/Protected"; // Enrollments 的权限保护
+import ProtectedRole from "./Enrollments/Protected";
 import { useSelector } from "react-redux";
 import * as courseClient from "./Courses/client";
 
@@ -71,7 +71,6 @@ export default function Kanbas() {
             <Route path="/" element={<Navigate to="Account" />} />
             <Route path="/Account/*" element={<Account />} />
 
-            {/* 保留 Dashboard 功能 */}
             <Route
               path="Dashboard"
               element={
@@ -88,7 +87,6 @@ export default function Kanbas() {
               }
             />
 
-            {/* Courses 页面 */}
             <Route
               path="Courses/:cid/*"
               element={
@@ -98,18 +96,17 @@ export default function Kanbas() {
               }
             />
 
-            {/* Enrollments 页面，仅 STUDENT 可见 */}
             <Route
-  path="/Enrollments"
-  element={
-    <ProtectedRole
-      role="STUDENT"
-      courseId={currentUser?.courseId || "defaultCourseId"} // 确保传递 courseId
-    >
-      <Enrollments />
-    </ProtectedRole>
-  }
-/>
+              path="/Enrollments"
+              element={
+                <ProtectedRole
+                  role="STUDENT"
+                  courseId={currentUser?.courseId || "defaultCourseId"}
+                >
+                  <Enrollments />
+                </ProtectedRole>
+              }
+            />
 
 
             <Route path="/Calendar" element={<h1>Calendar</h1>} />
