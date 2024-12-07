@@ -11,13 +11,20 @@ export default function Enrollments() {
     useEffect(() => {
         const fetchEnrollments = async () => {
             if (currentUser?._id) {
-                const data = await getEnrollmentsByUser(currentUser._id);
+                try {
+                    const data = await getEnrollmentsByUser(currentUser._id);
 
-                const uniqueEnrollments = Array.from(
-                    new Map(data.map((item: any) => [item._id, item])).values()
-                );
+                    // 确保 data 是一个数组
+                    const enrollments = Array.isArray(data) ? data : [];
 
-                dispatch(enroll(uniqueEnrollments));
+                    const uniqueEnrollments = Array.from(
+                        new Map(enrollments.map((item: any) => [item._id, item])).values()
+                    );
+
+                    dispatch(enroll(uniqueEnrollments));
+                } catch (error) {
+                    console.error("Error fetching enrollments:", error);
+                }
             }
         };
         fetchEnrollments();

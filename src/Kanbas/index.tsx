@@ -3,7 +3,6 @@ import Account from "./Account";
 import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
 import Courses from "./Courses";
-import Enrollments from "./Enrollments";
 import "./styles.css";
 import Session from "./Account/Session";
 import * as userClient from "./Account/client";
@@ -13,12 +12,11 @@ import ProtectedRole from "./Enrollments/Protected";
 import { useSelector } from "react-redux";
 import * as courseClient from "./Courses/client";
 
-
 export default function Kanbas() {
   const [courses, setCourses] = useState<any[]>([]);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-
   const [enrolling, setEnrolling] = useState<boolean>(false);
+
   const findCoursesForUser = async () => {
     try {
       const courses = await userClient.findCoursesForUser(currentUser._id);
@@ -27,6 +25,7 @@ export default function Kanbas() {
       console.error(error);
     }
   };
+
   const fetchCourses = async () => {
     try {
       const allCourses = await courseClient.fetchAllCourses();
@@ -72,12 +71,13 @@ export default function Kanbas() {
   }, [currentUser, enrolling]);
 
   const [course, setCourse] = useState<any>({
-    _id: "1234",
     name: "New Course",
-    number: "New Number",
-    startDate: "2023-09-10",
-    endDate: "2023-12-15",
-    description: "New Description",
+    number: "NEW101",
+    startDate: "2023-01-01",
+    endDate: "2023-05-15",
+    department: "General Studies",
+    credits: 3,
+    description: "Course Description",
   });
 
   const addNewCourse = async () => {
@@ -86,7 +86,7 @@ export default function Kanbas() {
   };
 
   const deleteCourse = async (courseId: string) => {
-    const status = await courseClient.deleteCourse(courseId);
+    await courseClient.deleteCourse(courseId);
     setCourses(courses.filter((course) => course._id !== courseId));
   };
 
@@ -123,8 +123,13 @@ export default function Kanbas() {
                     addNewCourse={addNewCourse}
                     deleteCourse={deleteCourse}
                     updateCourse={updateCourse}
-                    enrolling={enrolling} setEnrolling={setEnrolling}
-                    updateEnrollment={updateEnrollment} />
+                    enrolling={enrolling}
+                    setEnrolling={setEnrolling}
+                    updateEnrollment={updateEnrollment} enrollments={[]} handleEnroll={function (userId: string, courseId: string): void {
+                      throw new Error("Function not implemented.");
+                    }} handleUnenroll={function (userId: string, courseId: string): void {
+                      throw new Error("Function not implemented.");
+                    }} />
                 </ProtectedRoute>
               }
             />
@@ -137,19 +142,6 @@ export default function Kanbas() {
                 </ProtectedRoute>
               }
             />
-
-            <Route
-              path="/Enrollments"
-              element={
-                <ProtectedRole
-                  role="STUDENT"
-                  courseId={currentUser?.courseId || "defaultCourseId"}
-                >
-                  <Enrollments />
-                </ProtectedRole>
-              }
-            />
-
 
             <Route path="/Calendar" element={<h1>Calendar</h1>} />
             <Route path="/Inbox" element={<h1>Inbox</h1>} />
