@@ -17,13 +17,13 @@ export default function TOC() {
       <li className="nav-item"><a id="wd-k" href="#/Kanbas" className="nav-link">Kanbas</a></li>
       <li className="nav-item"><a id="wd-github" href="https://github.com/AofeiLi-code" target="_blank"
         className="nav-link">My GitHub</a></li>
-        <li className="nav-item"><a id="wd-github" href="https://github.com/AofeiLi-code/kanbas-react-web-app.git" target="_blank"
+      <li className="nav-item"><a id="wd-github" href="https://github.com/AofeiLi-code/kanbas-react-web-app.git" target="_blank"
         className="nav-link">React App Repository</a></li>
-        <li className="nav-item"><a id="wd-github" href="https://github.com/AofeiLi-code/kanbas-react-web-app.git" target="_blank"
+      <li className="nav-item"><a id="wd-github" href="https://github.com/AofeiLi-code/kanbas-node-server-app.git" target="_blank"
         className="nav-link">Node.js Server Repository</a></li>
-        <li className="nav-item"><a id="wd-github" href="https://a5--aofeili-cs4550.netlify.app" target="_blank"
+      <li className="nav-item"><a id="wd-github" href="https://a6--aofeili-cs4550.netlify.app" target="_blank"
         className="nav-link">React App on Netlify</a></li>
-        <li className="nav-item"><a id="wd-github" href="https://kanbas-node-server-app-7a3j.onrender.com" target="_blank"
+      <li className="nav-item"><a id="wd-github" href="https://kanbas-node-server-app-1-b6g9.onrender.com" target="_blank"
         className="nav-link">Node.js Server</a></li>
     </ul>
   );
